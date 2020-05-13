@@ -1,0 +1,8 @@
+#!/usr/bin/env python3.6
+
+name = input('What is your name?')
+birthdate = int(input('What is your birthdate?'))
+month = int(input('Which month of the year(number)?'))
+year = int(input('Which year(number)?'))
+
+print(f"{name} was born on {birthdate} / {month} / {year}")
