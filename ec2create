@@ -1,0 +1,13 @@
+#!/usr/bin/env python3.6
+
+import boto3
+
+ec2 = boto3.resource('ec2')
+
+instances = ec2.create_instances(
+        ImageId='ami-005956c5f0f757d37',
+        MinCount=1,
+        MaxCount=2,
+        InstanceType='t2.micro',
+        KeyName='ec2_keypair'
+        )
