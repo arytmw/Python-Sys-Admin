@@ -1,0 +1,9 @@
+#!/usr/bin/env python3.6
+
+import csv
+
+with open('data.csv', mode='r') as file:
+    csvfile = csv.reader(file)
+
+    for lines in csvfile:
+        print(lines)

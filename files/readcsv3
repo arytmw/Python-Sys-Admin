@@ -1,0 +1,6 @@
+#!/usr/bin/env python3.6
+
+import pandas
+
+csvfile = pandas.read_csv('data.csv')
+print(csvfile)

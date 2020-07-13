@@ -1,0 +1,11 @@
+#!/usr/bin/env python3.6
+
+#using csv.DictReader() to map csv into a dict
+
+import csv
+
+with open('data.csv', mode='r') as file:
+    csvfile = csv.DictReader(file)
+
+    for lines in csvfile:
+        print(lines)
