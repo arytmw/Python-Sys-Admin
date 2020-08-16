@@ -1,0 +1,12 @@
+#!/usr/bin/env python3.6
+
+import requests
+
+url = "https://ia803208.us.archive.org/6/items/j.-r.-r.-tolkien-la-comunidad-del-anillo-i/J.R.R.%20Tolkien%20La%20Comunidad%20del%20anillo%20I.pdf"
+
+res = requests.get(url, stream = True)
+
+with open('lotr.pdf','wb') as myfile:
+    for chunk in res.iter_content(chunk_size=1024):
+        if chunk:
+            myfile.write(chunk)

@@ -1,0 +1,8 @@
+#!/usr/bin/env python3.6
+
+import tarfile
+
+filename = 'sample.tar.gz'
+
+tf = tarfile.open(filename)
+print(tf.getnames())

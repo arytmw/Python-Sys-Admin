@@ -1,0 +1,9 @@
+#!/usr/bin/env python3.6
+
+import json
+
+with open('example_2.json', 'r') as openfile:
+    myjson = json.load(openfile)
+
+print(myjson)
+#print(type(json_obj))

@@ -1,0 +1,9 @@
+#!/usr/bin/env python3.6
+
+import glob
+
+print("using glob.glob")
+files = glob.glob('/etc/**/*', recursive=True)
+
+for file in files:
+    print(file)

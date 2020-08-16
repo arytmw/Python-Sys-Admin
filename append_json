@@ -1,0 +1,21 @@
+#!/usr/bin/env python3.6
+
+import json
+
+def write_json(data, filename = 'example_2.json'):
+    with open(filename, 'w') as f:
+        json.dump(data, f, indent=4)
+
+with open('example_2.json') as json_file:
+    data = json.load(json_file)
+
+    temp = ['quiz']
+
+    y = { 'sale_country': 'India',
+            'currency': 'INR',
+            'type': 'fruit'
+        }
+
+    temp.append(y)
+
+write_json(data)

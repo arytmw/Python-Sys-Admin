@@ -1,0 +1,7 @@
+#!/usr/bin/env python3.6
+import os
+from datetime import datetime
+
+lastmodified = os.stat('myfile.txt').st_mtime
+
+print(datetime.fromtimestamp(lastmodified))

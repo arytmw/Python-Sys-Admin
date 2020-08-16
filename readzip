@@ -1,0 +1,15 @@
+#!/usr/bin/env python3.6
+
+from zipfile import ZipFile
+import datetime
+
+filename = "sample.zip"
+
+with ZipFile(filename, 'r') as zip:
+    for info in zip.infolist():
+        print(info.filename)
+        print('\tModified:\t' + str(datetime.datetime(*info.date_time)))
+        print('\tSystem:\t\t' + str(info.create_system) + '(0 = Windows, 3 = Linux)')
+        print('\tZip version:\t' + str(info.create_version))
+        print('\tCompressed:\t' + str(info.compress_size) + 'bytes')
+        print('\tUncompressed:\t' + str(info.file_size) + 'bytes' )

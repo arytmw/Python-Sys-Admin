@@ -1,0 +1,96 @@
+#!/usr/bin/env python3.6
+
+import psutil
+import platform
+from datetime import datetime
+
+
+# 1253656 --> 1.20MB
+# 1253656678 ---> 1.17 GB
+def get_size(bytes, suffix="B"):
+    factor = 1024
+    for unit in ["","K","M","G","T","P"]:
+        if bytes < factor:
+            return f"{bytes:2f}{unit}{suffix}"
+        bytes /= factor
+
+print("="*40, "System Information", "="*40)
+
+uname = platform.uname()
+print(f"System: {uname.system}")
+print(f"Name: {uname.node}")
+print(f"Release: {uname.release}")
+print(f"Version: {uname.version}")
+print(f"Machine: {uname.machine}")
+print(f"Processor: {uname.processor}")
+#print(f"System: {platform.uname().system}")
+
+print("="*40, "Boot Time", "="*40)
+boot_time_timestamp = psutil.boot_time()
+bt = datetime.fromtimestamp(boot_time_timestamp)
+
+print(f"Boot time: {bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}")
+
+print("="*40, "CPU Info", "="*40)
+print("Physical cores:", psutil.cpu_count())
+
+cpufreq = psutil.cpu_freq()
+print(f"Current Frequency: {cpufreq.current} Mhz")
+#print(f"Maximum Frequency: {cpufreq.max:.2f} Mhz")
+
+print("="*40, "Memory Information", "="*40)
+sysmem = psutil.virtual_memory()
+print(f"Total Memory: {get_size(sysmem.total)}")
+print(f"Available Memory: {get_size(sysmem.available)}")
+print(f"Used Memory: {get_size(sysmem.used)}")
+print(f"Percentage: {sysmem.percent}%")
+swap = psutil.swap_memory()
+print(f"Total Swap: {get_size(swap.total)}")
+print(f"Free Swap: {get_size(swap.free)}")
+print(f"Used Swap: {get_size(swap.used)}")
+print(f"Percentage: {swap.percent}%")
+
+print("="*40, "Disk Information", "="*40)
+part = psutil.disk_partitions()
+#partition_usage = psutil.disk_usage(partition.mountpoint)
+for partition in part:
+    print(f"Device: {partition.device}")
+    print(f"MountPoint: {partition.mountpoint}")
+    print(f"File System Type: {partition.fstype}")
+    try:
+        partition_usage = psutil.disk_usage(partition.mountpoint)
+    except PermissionError:
+        continue
+    print(f"Total Size: {get_size(partition_usage.total)}")
+    print(f"Used Size: {get_size(partition_usage.used)}")
+    print(f"Free Size: {get_size(partition_usage.free)}")
+    print(f"Percentage: {get_size(partition_usage.percent)}%")
+
+print("="*40, "Network Information", "="*40)
+
+if_addrs = psutil.net_if_addrs()
+
+for interface_name, interface_addresses in if_addrs.items():
+    for address in interface_addresses:
+        print(f"Interface: {interface_name}")
+        if str(address.family) == 'AddressFamily.AF_INET':
+            print(f"IP Address: {address.address}")
+            print(f"Netmask: {address.netmask}")
+            print(f"Broadcast IP: {address.broadcast}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
