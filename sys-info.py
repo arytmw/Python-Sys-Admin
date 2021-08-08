@@ -1,4 +1,4 @@
-mport platform
+import platform
 import psutil #pip3.6 install psutil
 import humanize #pip3.6 install humanize
 import time
